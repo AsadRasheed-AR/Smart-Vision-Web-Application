@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -16,30 +15,12 @@ import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
 import FlashAutoIcon from '@material-ui/icons/FlashAuto';
 import { green } from '@material-ui/core/colors';
 
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
-
-export default function SimpleCard() {
-  const classes = useStyles();
+class SimpleCard extends React.Component{
   // const bull = <span className={classes.bullet}>•</span>;
 
-  return (
-    <Card className={classes.root}>
+  render (){
+  return (<div>
+    <Card style={{minWidth:'275'}}>
       <CardContent>
         <Typography variant="h4" component="h2" color="textSecondary" align='center'>
           Current Status
@@ -60,7 +41,7 @@ export default function SimpleCard() {
                 // inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
                 />
             </ListItemSecondaryAction>
-            <FlashAutoIcon style={{ color: green[500] }}/>
+            {/* <FlashAutoIcon style={{ color: green[500] }}/> */}
             </ListItem>
             <Divider style={{margin:'20px'}}/>
             <ListItem>
@@ -76,7 +57,7 @@ export default function SimpleCard() {
                 // inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
                 />
             </ListItemSecondaryAction>
-            <FlashAutoIcon style={{ color: green[500] }}/>
+            {/* <FlashAutoIcon style={{ color: green[500] }}/> */}
             </ListItem>
             <Divider style={{margin:'20px'}}/>
             <ListItem>
@@ -93,10 +74,14 @@ export default function SimpleCard() {
                 // inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
                 />
             </ListItemSecondaryAction>
-            <FlashAutoIcon color='disabled'/>
+            {/* <FlashAutoIcon color='disabled'/> */}
             </ListItem>
+            <FlashAutoIcon color='disabled'/>
         </List>
       </CardContent>
     </Card>
+    </div>
   );
-}
+}}
+
+export default SimpleCard
