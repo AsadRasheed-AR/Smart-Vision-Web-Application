@@ -15,6 +15,7 @@ import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
 import Grid from '@material-ui/core/Grid';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
+import MyListItem from './ListItem';
 
 
 class ConfigurationCard extends React.Component {
@@ -40,7 +41,7 @@ class ConfigurationCard extends React.Component {
     console.log(response.status)
   }
 
-  handleToggle(btnName,status) {
+  handleToggle = (btnName,status) => {
     switch (btnName) {
       case 'btn1':
          this.setState({Btn1_autoControl: status})      
@@ -79,8 +80,14 @@ class ConfigurationCard extends React.Component {
               Auto Control Status
             </Typography>
             </div>
-  
+
             <List>
+              <MyListItem btnText="Ceilling Fan" name='btn1' icon={<ToysIcon fontSize='large' color='primary' />} onToggle={this.handleToggle} curState={this.state.Btn1_autoControl}/>
+              <MyListItem btnText="Energy Saver" name='btn2' icon={<WbIncandescentIcon fontSize='large' color='secondary' />} onToggle={this.handleToggle} curState={this.state.Btn2_autoControl}/>
+              <MyListItem btnText="AC" name='btn3' icon={<AcUnitOutlinedIcon fontSize='large' color='primary' />} onToggle={this.handleToggle} curState={this.state.Btn3_autoControl}/>
+            </List>
+  
+            {/* <List>
               <ListItem>
                   <ListItemIcon>
                       <ToysIcon fontSize='large' color='primary' />
@@ -122,7 +129,7 @@ class ConfigurationCard extends React.Component {
                   />
               </ListItemSecondaryAction>
               </ListItem>
-          </List>
+          </List> */}
           <div style={{display:'flex',justifyContent:'space-between',margin:'20px'}}>
           <Button variant="contained" color="primary" disableElevation size='large' onClick={this.initializeComponent}>
             Get Status
