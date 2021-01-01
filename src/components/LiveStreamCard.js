@@ -3,39 +3,41 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import image from './test.jpg';
+import axios from 'axios';
 
 
+class LiveStreamCard extends React.Component {
+  state = {showProcessedVideo : false};
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 275,
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
-  },
-  title: {
-    fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-});
+  getVideoStatus = async () => {
+    const response = await axios.get('/getVideoStatus');
+    if (response.status == 200){
+      this.setState({showProcessedVideo : response.data['showProcessedVideo']})
+    }
+  }
 
-export default function LiveStreamCard() {
-  const classes = useStyles();
-  // const bull = <span className={classes.bullet}>•</span>;
+  onButtonClick = async () => {
+    const response = await axios.post('/switchVideo', {showProcessedVideo : !this.state.showProcessedVideo});
+    if (response.status == 200){
+      this.setState({showProcessedVideo : !this.state.showProcessedVideo})
+      console.log(response.status)
+      console.log(this.state)
+    }
+  }
 
+  componentDidMount(){
+    this.getVideoStatus();
+  }
+
+  render(){
   return (
       <div>
-      <Card className={classes.root}>
+      <Card style={{minWidth: 275}}>
       <CardContent>
-      <img src={image} alt='Live Stream' style={{maxWidth:'100%',height:'auto',marginBottom:'40px'}}/>
+      <img src='http://127.0.0.1:5000/video_feed' alt='Live Stream' style={{maxWidth:'100%',height:'auto',marginBottom:'40px'}}/>
       <div style={{display:'flex',justifyContent:'center'}}>
-        <Button variant="contained" color="secondary" size='large'>
-            Show Processed Video
+        <Button variant="contained" color="secondary" size='large' onClick={this.onButtonClick}>
+            {this.state.showProcessedVideo ? 'Show Orignal Video' : 'Show Processed Video'}
         </Button>
       </div>
       
@@ -43,5 +45,7 @@ export default function LiveStreamCard() {
       </Card>
       </div>
  
-  );
+  )};
 }
+
+export default LiveStreamCard
