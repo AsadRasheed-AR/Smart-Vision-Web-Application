@@ -5,17 +5,12 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import ToysIcon from '@material-ui/icons/Toys';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
 import Grid from '@material-ui/core/Grid';
-import Checkbox from '@material-ui/core/Checkbox';
 import axios from 'axios';
-import MyListItem from './ListItem';
+import {MyListItem_CheckBox} from './ListItem';
 
 
 class ConfigurationCard extends React.Component {
@@ -82,54 +77,29 @@ class ConfigurationCard extends React.Component {
             </div>
 
             <List>
-              <MyListItem btnText="Ceilling Fan" name='btn1' icon={<ToysIcon fontSize='large' color='primary' />} onToggle={this.handleToggle} curState={this.state.Btn1_autoControl}/>
-              <MyListItem btnText="Energy Saver" name='btn2' icon={<WbIncandescentIcon fontSize='large' color='secondary' />} onToggle={this.handleToggle} curState={this.state.Btn2_autoControl}/>
-              <MyListItem btnText="AC" name='btn3' icon={<AcUnitOutlinedIcon fontSize='large' color='primary' />} onToggle={this.handleToggle} curState={this.state.Btn3_autoControl}/>
+              <MyListItem_CheckBox 
+                btnText="Ceilling Fan" 
+                name='btn1' 
+                icon={<ToysIcon fontSize='large' color='primary' />} 
+                onToggle={this.handleToggle} 
+                curState={this.state.Btn1_autoControl}/>
+
+              <MyListItem_CheckBox 
+              btnText="Energy Saver" 
+              name='btn2' 
+              icon={<WbIncandescentIcon fontSize='large' color='secondary' />} 
+              onToggle={this.handleToggle} 
+              curState={this.state.Btn2_autoControl}/>
+
+              <MyListItem_CheckBox 
+              btnText="AC" 
+              name='btn3' 
+              icon={<AcUnitOutlinedIcon fontSize='large' color='primary' />} 
+              onToggle={this.handleToggle} 
+              curState={this.state.Btn3_autoControl}/>
+              
             </List>
-  
-            {/* <List>
-              <ListItem>
-                  <ListItemIcon>
-                      <ToysIcon fontSize='large' color='primary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="Ceilling Fan"/>
-              <ListItemSecondaryAction  style={{marginRight:'40px'}}>
-                  <Checkbox
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn1',e.target.checked)}
-                  checked={this.state.Btn1_autoControl}
-                  />
-              </ListItemSecondaryAction>
-              </ListItem>
-              <Divider style={{margin:'20px'}}/>
-              <ListItem>
-                  <ListItemIcon>
-                      <WbIncandescentIcon fontSize='large' color='secondary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="Energy Saver"/>
-              <ListItemSecondaryAction style={{marginRight:'40px'}}>
-                  <Checkbox
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn2',e.target.checked)}
-                  checked={this.state.Btn2_autoControl}
-                  />
-              </ListItemSecondaryAction>
-              </ListItem>
-              <Divider style={{margin:'20px'}}/>
-              <ListItem>
-                  <ListItemIcon>
-                      <AcUnitOutlinedIcon fontSize='large' color='primary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="AC"/>
-              <ListItemSecondaryAction style={{marginRight:'40px'}}>
-                  <Checkbox
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn3',e.target.checked)}
-                  checked={this.state.Btn3_autoControl}
-                  />
-              </ListItemSecondaryAction>
-              </ListItem>
-          </List> */}
+
           <div style={{display:'flex',justifyContent:'space-between',margin:'20px'}}>
           <Button variant="contained" color="primary" disableElevation size='large' onClick={this.initializeComponent}>
             Get Status

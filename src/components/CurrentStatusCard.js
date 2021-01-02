@@ -12,9 +12,9 @@ import Switch from '@material-ui/core/Switch';
 import ToysIcon from '@material-ui/icons/Toys';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
-import FlashAutoIcon from '@material-ui/icons/FlashAuto';
-import { green } from '@material-ui/core/colors';
+
 import axios from 'axios';
+import {MyListItem_Switch} from './ListItem';
 
 
 
@@ -22,19 +22,31 @@ class SimpleCard extends React.Component{
 
   state = {btn1:false , btn2:false , btn3:false ,btn1Auto:true, btn2Auto:true , btn3Auto:true , configured : false};
 
-  handleToggle(btnName,status) {
+  setCurrentStatus = async (data) => {
+    const response = await axios.post('/setCurrentStatus', data);
+    let res = response.status == 200 ?  true : false
+    return res
+  }
+
+  handleToggle = (btnName,status) => {
     switch (btnName) {
       case 'btn1':
-        if (!this.state.btn1Auto)
-          this.setState({btn1: status})      
+        if (!this.state.btn1Auto){
+          const res = this.setCurrentStatus({Btn1_status : status})
+          res ? this.setState({btn1: status}) : console.log('Error Occured')
+        }     
         break;
       case 'btn2':
-        if (!this.state.btn2Auto)
-          this.setState({btn2: status}) 
+        // if (!this.state.btn2Auto)
+        //   this.setState({btn2: status}) 
+        if (!this.state.btn2Auto){
+          this.setCurrentStatus({Btn2_status : status}).then(this.setState({btn2: status}))
+        }  
         break;
       case 'btn3':
-        if (!this.state.btn3Auto)
-          this.setState({btn3: status})
+        if (!this.state.btn3Auto){
+          this.setCurrentStatus({Btn3_status : status}).then(this.setState({btn3: status}))
+        }  
           break;
     
       default:
@@ -94,52 +106,31 @@ componentDidUpdate(){
             Current Status
           </Typography>
           <Divider style={{margin:'20px'}}/>
-  
           <List>
-              <ListItem>
-                  <ListItemIcon>
-                      <ToysIcon fontSize='large' color='primary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="Ceilling Fan"/>
-              <ListItemSecondaryAction  style={{marginRight:'40px'}}>
-                  <Switch
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn1',e.target.checked)}
-                  checked={this.state.btn1}
-                  />
-              </ListItemSecondaryAction>
-              <FlashAutoIcon style={{ color: green[500] }}/>
-              </ListItem>
-              <Divider style={{margin:'20px'}}/>
-              <ListItem>
-                  <ListItemIcon>
-                      <WbIncandescentIcon fontSize='large' color='secondary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="Energy Saver"/>
-              <ListItemSecondaryAction style={{marginRight:'40px'}}>
-                  <Switch
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn2',e.target.checked)}
-                  checked={this.state.btn2}
-                  />
-              </ListItemSecondaryAction>
-              <FlashAutoIcon style={{ color: green[500] }}/>
-              </ListItem>
-              <Divider style={{margin:'20px'}}/>
-              <ListItem>
-                  <ListItemIcon>
-                      <AcUnitOutlinedIcon fontSize='large' color='primary' />
-                  </ListItemIcon>
-          <   ListItemText id="switch-list-label-wifi" primary="AC"/>
-              <ListItemSecondaryAction style={{marginRight:'40px'}}>
-                  <Switch
-                  edge="end"
-                  onChange={(e)=>this.handleToggle('btn3',e.target.checked)}
-                  checked={this.state.btn3}
-                  />
-              </ListItemSecondaryAction>
-              <FlashAutoIcon color='disabled'/>
-              </ListItem>
+            <MyListItem_Switch 
+              btnText="Ceilling Fan" 
+              name='btn1' 
+              icon={<ToysIcon fontSize='large' color='primary' />} 
+              onToggle={this.handleToggle} 
+              curState={this.state.btn1} 
+              autoControl={this.state.btn1Auto}/>
+
+            <MyListItem_Switch 
+              btnText="Energy Saver" 
+              name='btn2' 
+              icon={<WbIncandescentIcon 
+              fontSize='large' color='secondary' />} 
+              onToggle={this.handleToggle} 
+              curState={this.state.btn2} 
+              autoControl={this.state.btn2Auto}/>
+
+            <MyListItem_Switch 
+              btnText="AC"           
+              name='btn3' 
+              icon={<AcUnitOutlinedIcon fontSize='large' color='primary' />} 
+              onToggle={this.handleToggle} 
+              curState={this.state.btn3} 
+              autoControl={this.state.btn3Auto}/>
           </List>
         </CardContent>
       </Card>
