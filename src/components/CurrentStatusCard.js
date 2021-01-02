@@ -4,23 +4,17 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Divider } from '@material-ui/core';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
-import Switch from '@material-ui/core/Switch';
 import ToysIcon from '@material-ui/icons/Toys';
 import WbIncandescentIcon from '@material-ui/icons/WbIncandescent';
 import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
-
 import axios from 'axios';
 import {MyListItem_Switch} from './ListItem';
-
+import AlertDialogSlide from './DialogBox';
 
 
 class SimpleCard extends React.Component{
 
-  state = {btn1:false , btn2:false , btn3:false ,btn1Auto:true, btn2Auto:true , btn3Auto:true , configured : false};
+  state = {btn1:false , btn2:false , btn3:false ,btn1Auto:true, btn2Auto:true , btn3Auto:true , showDialog : false};
 
   setCurrentStatus = async (data) => {
     const response = await axios.post('/setCurrentStatus', data);
@@ -34,19 +28,19 @@ class SimpleCard extends React.Component{
         if (!this.state.btn1Auto){
           const res = this.setCurrentStatus({Btn1_status : status})
           res ? this.setState({btn1: status}) : console.log('Error Occured')
-        }     
+        } else {this.setState({showDialog : true});}     
         break;
       case 'btn2':
         // if (!this.state.btn2Auto)
         //   this.setState({btn2: status}) 
         if (!this.state.btn2Auto){
           this.setCurrentStatus({Btn2_status : status}).then(this.setState({btn2: status}))
-        }  
+        } else {this.setState({showDialog : true});}
         break;
       case 'btn3':
         if (!this.state.btn3Auto){
           this.setCurrentStatus({Btn3_status : status}).then(this.setState({btn3: status}))
-        }  
+        } else {this.setState({showDialog : true});} 
           break;
     
       default:
@@ -88,6 +82,10 @@ getCurrentStatus = async () => {
        btn2 : btn2_status , 
        btn3 : btn3_status 
       })
+}
+
+closeDialog = () => {
+  this.setState({showDialog : false});
 }
 
 componentDidMount(){
@@ -138,7 +136,13 @@ componentDidUpdate(){
   }
 
   render(){
-       return <div>{this.getContent()}</div>
+       return (
+        <div>
+          {this.getContent()}
+          <AlertDialogSlide openDialog={this.state.showDialog} closeDialog={this.closeDialog}/>
+        </div>
+        
+       )
   }
   }
 
