@@ -72,16 +72,19 @@ initializeComponent = async () =>{
 
 getCurrentStatus = async () => {
   const response = await axios.get('/getCurrentStatus');
-  const btn1_status = this.state.btn1Auto ? response.data['Btn1_status'] : this.state.btn1Auto;
-  const btn2_status = this.state.btn1Auto ? response.data['Btn2_status'] : this.state.btn2Auto;
-  const btn3_status = this.state.btn1Auto ? response.data['Btn3_status'] : this.state.btn3Auto;
+  const btn1_status = this.state.btn1Auto ? response.data['Btn1_status'] : this.state.btn1;
+  const btn2_status = this.state.btn2Auto ? response.data['Btn2_status'] : this.state.btn2;
+  const btn3_status = this.state.btn3Auto ? response.data['Btn3_status'] : this.state.btn3;
 
-  if (this.state.btn1 != btn1_status && this.state.btn2 != btn2_status && this.state.btn3 != btn3_status)
+  if (this.state.btn1 != btn1_status || this.state.btn2 != btn2_status || this.state.btn3 != btn3_status)
+  {
     this.setState({
-       btn1 : btn1_status ,
-       btn2 : btn2_status , 
-       btn3 : btn3_status 
-      })
+      btn1 : btn1_status ,
+      btn2 : btn2_status , 
+      btn3 : btn3_status 
+     })
+     console.log('Previous status is not equal to Current')
+  }
 }
 
 closeDialog = () => {
