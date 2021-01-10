@@ -10,11 +10,12 @@ import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
 import axios from 'axios';
 import {MyListItem_Switch} from './ListItem';
 import AlertDialogSlide from './DialogBox';
+import CustomizedSnackbars from './SnackBar';
 
 
 class SimpleCard extends React.Component{
 
-  state = {btn1:false , btn2:false , btn3:false ,btn1Auto:true, btn2Auto:true , btn3Auto:true , showDialog : false};
+  state = {btn1:false , btn2:false , btn3:false ,btn1Auto:true, btn2Auto:true , btn3Auto:true , showDialog : false ,showSnackBar : true};
 
   setCurrentStatus = async (data) => {
     const response = await axios.post('/setCurrentStatus', data);
@@ -75,6 +76,7 @@ getCurrentStatus = async () => {
   const btn1_status = this.state.btn1Auto ? response.data['Btn1_status'] : this.state.btn1;
   const btn2_status = this.state.btn2Auto ? response.data['Btn2_status'] : this.state.btn2;
   const btn3_status = this.state.btn3Auto ? response.data['Btn3_status'] : this.state.btn3;
+  const esp_status = response.data['esp_connected'];
 
   if (this.state.btn1 != btn1_status || this.state.btn2 != btn2_status || this.state.btn3 != btn3_status)
   {
@@ -85,6 +87,8 @@ getCurrentStatus = async () => {
      })
      console.log('Previous status is not equal to Current')
   }
+  if (this.state.showSnackBar != (!esp_status))
+    this.setState({showSnackBar : !esp_status})
 }
 
 closeDialog = () => {
@@ -143,6 +147,7 @@ componentDidUpdate(){
         <div>
           {this.getContent()}
           <AlertDialogSlide openDialog={this.state.showDialog} closeDialog={this.closeDialog}/>
+          <CustomizedSnackbars state={this.state.showSnackBar} message="Wifi Module Not Responding , Please Check Connection !"/>
         </div>
         
        )
