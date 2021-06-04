@@ -11,6 +11,8 @@ import ButtonAppBar from './AppBar';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import VoiceChatIcon from '@material-ui/icons/VoiceChat';
 import SettingsIcon from '@material-ui/icons/Settings';
+import Typography from '@material-ui/core/Typography';
+// import '@fontsource/roboto';
 
 const useStyles = makeStyles({
   list: {
@@ -51,6 +53,10 @@ export default function TemporaryDrawer(props) {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+    <img src="/LOGO-removebg-preview.png" alt="image" style={{width:'200px' , height:'auto' , display:'block' ,margin:'auto'}} />
+    <Typography variant="h5" style={{fontWeight:'bolder' , fontFamily:'system-ui' , textAlign:'center' , color : '#45454595'}} gutterBottom>
+        SMART VISION
+      </Typography>
     <Divider style={{margin:'20px'}} />
       <List>
         {['Dashboard', 'LiveStream', 'Configuration'].map((text, index) => (
@@ -63,7 +69,7 @@ export default function TemporaryDrawer(props) {
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider style={{margin:'20px'}}/>
     </div>
   );
 

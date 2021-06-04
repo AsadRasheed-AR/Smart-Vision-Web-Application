@@ -30,8 +30,8 @@ export default function ButtonAppBar(props) {
           <IconButton onClick={props.onClick('left',true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
-          <Typography variant="h4" className={classes.title}>
-            Smart Vision
+          <Typography variant="h4" style={{fontFamily:'system-ui' , fontWeight:'bolder'}} className={classes.title}>
+            SMART VISION
           </Typography>
           {/* <Button color="inherit">Logout</Button> */}
         </Toolbar>
