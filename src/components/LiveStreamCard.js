@@ -34,7 +34,7 @@ class LiveStreamCard extends React.Component {
       <div>
       <Card style={{minWidth: 275}}>
       <CardContent>
-      <img src='http://127.0.0.1:5000/video_feed' alt='Live Stream' style={{maxWidth:'100%',height:'auto',marginBottom:'40px'}}/>
+      <img src='http://127.0.0.1:5000/video_feed' alt='Live Stream' style={{width:'100%',height:'90vh',marginBottom:'40px'}}/>
       <div style={{display:'flex',justifyContent:'center'}}>
         <Button variant="contained" color="secondary" size='large' onClick={this.onButtonClick}>
             {this.state.showProcessedVideo ? 'Show Orignal Video' : 'Show Processed Video'}

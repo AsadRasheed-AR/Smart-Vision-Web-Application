@@ -11,6 +11,7 @@ import AcUnitOutlinedIcon from '@material-ui/icons/AcUnitOutlined';
 import Grid from '@material-ui/core/Grid';
 import axios from 'axios';
 import {MyListItem_CheckBox} from './ListItem';
+import Container from '@material-ui/core/Container';
 
 
 class ConfigurationCard extends React.Component {
@@ -119,7 +120,13 @@ class ConfigurationCard extends React.Component {
 
 
   render(){
-      return <div>{this.getContent()}</div>
+      return(
+         <div>          
+          <Container maxWidth="sm" style={{marginTop:'50px'}}>
+            {this.getContent()}
+          </Container>
+        </div>
+      )
  }
 }
 

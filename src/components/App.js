@@ -29,18 +29,20 @@ class App extends React.Component{
             return<ConfigurationCard/>
         else 
             return(
-                <Card style={{minWidth:'275'}}>
-            <       CardContent>
-                        <Typography variant="h4" component="h2" color="primary" align='center'>
-                            Loading ...
-                        </Typography>
-                        <Divider style={{margin:'20px'}}/>
-                        <Typography variant="h6" component="h2" color="primary" align='center' style={{margin:'40px'}}>
-                            Fetching Data From The Server, Please Wait ..
-                        </Typography>
-                        <LinearProgress color="secondary" />
-                    </CardContent>
-                </Card>
+                <Container maxWidth="sm" style={{marginTop:'50px'}}>
+                    <Card style={{minWidth:'275'}}>
+                        <CardContent>
+                            <Typography variant="h4" component="h2" color="primary" align='center'>
+                                Loading ...
+                            </Typography>
+                            <Divider style={{margin:'20px'}}/>
+                            <Typography variant="h6" component="h2" color="primary" align='center' style={{margin:'40px'}}>
+                                Fetching Data From The Server, Please Wait ..
+                            </Typography>
+                            <LinearProgress color="secondary" />
+                        </CardContent>
+                    </Card>
+                </Container>
             );
     }
 componentDidMount(){
@@ -52,7 +54,7 @@ componentDidMount(){
         return (
             <div>
                 <TemporaryDrawer onNavigation={this.onNavigationclick}/>
-                <Container maxWidth="sm" style={{marginTop:'50px'}}>
+                <Container style={{marginTop:'10px'}}>
                     {this.getContent()}
                 </Container>
             </div>

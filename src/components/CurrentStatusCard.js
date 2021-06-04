@@ -11,7 +11,7 @@ import axios from 'axios';
 import {MyListItem_Switch} from './ListItem';
 import AlertDialogSlide from './DialogBox';
 import CustomizedSnackbars from './SnackBar';
-
+import Container from '@material-ui/core/Container';
 
 class SimpleCard extends React.Component{
 
@@ -145,7 +145,9 @@ componentDidUpdate(){
   render(){
        return (
         <div>
-          {this.getContent()}
+          <Container maxWidth="sm" style={{marginTop:'50px'}}>
+            {this.getContent()}
+          </Container>
           <AlertDialogSlide openDialog={this.state.showDialog} closeDialog={this.closeDialog}/>
           <CustomizedSnackbars state={this.state.showSnackBar} message="Wifi Module Not Responding , Please Check Connection !"/>
         </div>

@@ -33,7 +33,7 @@ export default function ButtonAppBar(props) {
           <Typography variant="h4" className={classes.title}>
             Smart Vision
           </Typography>
-          <Button color="inherit">Logout</Button>
+          {/* <Button color="inherit">Logout</Button> */}
         </Toolbar>
       </AppBar>
     </div>
